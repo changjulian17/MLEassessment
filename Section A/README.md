@@ -22,3 +22,10 @@
 
 [requirements.txt](requirements.txt): Prerequisite python libraries to run notebook and source code  
 
+### Dataset
+Chosen from the internet as a typical example on non-linear datasets for classification. In this case the concentric
+circles cannot be classified with a straight line but a circle. Additionally there is some noise leading to overlap 
+increasing the difficulty of the generalisation.
+
+I first created a 2 then 4 layer fully connected layer which plateaued above 80% accuracy. There is some variance,
+Given that the results 

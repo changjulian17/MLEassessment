@@ -1,5 +1,6 @@
 import numpy as np
 from base import BaseMLP
+from sklearn.model_selection import KFold
 
 
 def init_params():
@@ -163,3 +164,19 @@ class NeuralNet(BaseMLP):
         predictions = get_predictions(self.A[4])  # todo change to output layer
 
         return predictions
+
+    def cross_validate(self, X, Y, k_folds):
+        kf = KFold(n_splits=k_folds)
+        accuracies = []
+
+        for train_index, test_index in kf.split(X):
+            X_train, X_test = X[train_index], X[test_index]
+            Y_train, Y_test = Y[train_index], Y[test_index]
+
+            self.fit(X_train, Y_train)
+            predictions = self.predict(X_test)
+            accuracy = get_accuracy(predictions, Y_test)
+            accuracies.append(accuracy)
+
+        avg_accuracy = sum(accuracies) / len(accuracies)
+        print(f"Average Accuracy: {avg_accuracy}")
