@@ -18,7 +18,7 @@ def preprocess_and_save_data():
     # Enriching with two more attributes
     # Count of tags
     df_feat['tags_count'] = df_feat['tags'].apply(lambda x: len(x.split(',')))
-    df_test['tage_count'] = df_test['tags'].apply(lambda x: len(x.split(',')))
+    df_test['tags_count'] = df_test['tags'].apply(lambda x: len(x.split(',')))
     # Longest tag
     df_feat['longest_tag_length'] = df_feat['tags'].apply(lambda x: max(len(tag) for tag in x.split(',')))
     df_test['longest_tag_length'] = df_test['tags'].apply(lambda x: max(len(tag) for tag in x.split(',')))
@@ -35,9 +35,15 @@ def preprocess_and_save_data():
 
     with open('../data/preprocessed_data/X.pickle', 'wb') as f:
         pickle.dump(X, f)
-
+    f.close()
     with open('../data/preprocessed_data/Y.pickle', 'wb') as f:
         pickle.dump(Y, f)
-
+    f.close()
     with open('../data/preprocessed_data/X_eval.pickle', 'wb') as f:
         pickle.dump(X_eval, f)
+    f.close()
+    with open('../data/preprocessed_data/label_encoder.pickle', 'wb') as f:
+        pickle.dump(label_encoder, f)
+    f.close()
+
+# preprocess_and_save_data() #todo remove if called from elsewhere
