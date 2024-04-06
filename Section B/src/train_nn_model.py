@@ -1,3 +1,5 @@
+import pickle
+
 import pandas as pd
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.pipeline import Pipeline
@@ -6,35 +8,13 @@ from sklearn.compose import ColumnTransformer
 from sklearn.metrics import accuracy_score
 from sklearn.neural_network import MLPClassifier
 
-"""
-getting data for training
-"""
-df_feat = pd.read_csv('../data/features.csv')
-df_y = pd.read_csv('../data/labels.csv')
+# Load pre-processed data
+with open('../data/preprocessed_data/X.pickle', 'rb') as f:
+    X = pickle.load(f)
+with open('../data/preprocessed_data/Y.pickle', 'rb') as f:
+    Y = pickle.load(f)
 
-"""
-Training with xgboost
-"""
-
-# Drop nulls
-df_feat = df_feat.dropna()
-df_y = df_y.loc[df_feat.index]
-
-# Enriching with two more attributes
-# Count of tags
-df_feat['tags_count'] = df_feat['tags'].apply(lambda x: len(x.split(',')))
-# Longest tag
-df_feat['longest_tag_length'] = df_feat['tags'].apply(lambda x: max(len(tag) for tag in x.split(',')))
-
-# Drop title and tags col
-X = df_feat.drop(columns=['title', 'tags']).set_index('trackID')
-Y = df_y.set_index('trackID')
-
-# Initialize LabelEncoder
-label_encoder = LabelEncoder()
-# Fit and transform the target variable
-Y = label_encoder.fit_transform(Y.genre)
-
+# Split data
 X_train, X_test, Y_train, Y_test = train_test_split(X,
                                                     Y,
                                                     test_size=0.2,
@@ -87,3 +67,7 @@ cv_scores = cross_val_score(model, X_train, Y_train, cv=10)
 # Print the cross-validation scores
 print("Cross-validation scores:", cv_scores)
 print("Mean CV score:", cv_scores.mean())
+
+# Saving model to pickle file
+with open('../model/nn.pickle', 'wb') as f:
+    pickle.dump(model, f)
