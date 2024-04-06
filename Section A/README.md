@@ -1,21 +1,24 @@
 # Section A
 ## Question 1 Regression
-code and explanations in jupyter notebook
-[section-a.ipynb](section-a.ipynb)
-## Question 2 Ensemble Errors
-code and explanations in jupyter notebook
-[section-a.ipynb](section-a.ipynb)
-## Question 3 Naive Classifier
-code and explanations in jupyter notebook
-[section-a.ipynb](section-a.ipynb)
-## Question 4 Search
-code and explanations in jupyter notebook
-[section-a.ipynb](section-a.ipynb)
-## Question 5 NN
-code is in src folder [src](src)
-- base.py
-- neuralnetworkclassifier.py
+[section-a.ipynb](section-a.ipynb) code and explanations in jupyter notebook
 
-callout and explanations in jupyter notebook
-[section-a.ipynb](section-a.ipynb)
+## Question 2 Ensemble Errors
+[section-a.ipynb](section-a.ipynb) code and explanations in jupyter notebook
+
+## Question 3 Naive Classifier
+[section-a.ipynb](section-a.ipynb) code and explanations in jupyter notebook
+
+## Question 4 Search
+[section-a.ipynb](section-a.ipynb) code and explanations in jupyter notebook
+
+## Question 5 NN
+[src](src) code is in src folder 
+- base.py
+- NeuralNetworkClassifier.py
+- get_data
+  - gets data from sklearn and split to train and test
+
+[section-a.ipynb](section-a.ipynb) run of fit and predict in this notebook with explanations in jupyter notebook
+
+[requirements.txt](requirements.txt): Prerequisite python libraries to run notebook and source code  
 
