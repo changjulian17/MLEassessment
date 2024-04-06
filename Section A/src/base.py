@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 
+
 class BaseMLP(ABC):
     """
     Base class for MLP classification.
     """
+
     def __init__(self, hidden_layer_sizes, batch_size, learning_rate, max_iter, random_state, momentum):
         self.hidden_layer_sizes = hidden_layer_sizes
         self.batch_size = batch_size
@@ -13,7 +15,7 @@ class BaseMLP(ABC):
         self.momentum = momentum
 
     @abstractmethod
-    def fit(self, x, y)-> None:
+    def fit(self, x, y) -> None:
         """
         Fit the model to data matrix X and target(s) Y.
 
