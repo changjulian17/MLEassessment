@@ -79,9 +79,6 @@ def preprocess_request_data(track_dict: BaseModel) -> pd.DataFrame:
 
     return df_tracks
 
-
-# preprocess_and_save_data() #todo remove if called from elsewhere
-
 def basemodel_converter(track_dict: BaseModel) -> pd.DataFrame:
     """
     Convert Pydantic BaseModel to DataFrame.

@@ -80,10 +80,16 @@ calculate_similarity(data: list, idx: int) -> list:
 
 ## Question 5 NN
 [src](src) code is in src folder 
-- base.py
-- NeuralNetworkClassifier.py
-- get_data
-  - gets data from sklearn and split to train and test
+Input layer 0
+Hidden layers 1, 3, 5, 7
+Dropout layers 2, 4, 6, 8
+output layer 9
+assumed drop out of 0.3
+
+There was no implementation of 
+- residuals between 1 and 3
+- momentum
+- parameterised hidden layers
 
 [section-a.ipynb](section-a.ipynb) run of fit and predict in this notebook with explanations in jupyter notebook
 
@@ -102,10 +108,10 @@ train accuracy ~ 85%
 
 test accuracy ~ 79.5%
 
-There is some variance given that 1.5% difference in accuracy. However it will be better to review with further Cross Validation with K folds. Also include a confusion matrix and ROC to review the performance. Given only 4 layers, I expected there to be higher bias as the model may not have a specific enough model of the population. However when model is used to check the test data accuracy drops signifiantly, indicating high variance and possible overfitting. Adding the dropout layers can help significantly at improving that performance.
+There is some variance given that 1% difference in accuracy. However it will be better to review with further Cross Validation with K folds. Also include a confusion matrix and ROC to review the performance. Given only 4 layers, I expected there to be higher bias as the model may not have a specific enough model of the population. However when model is used to check the test data accuracy drops signifiantly, indicating high variance and possible overfitting. Adding the dropout layers can help significantly at improving that performance.
 
 
-> Final accuracy around 85%
+> Final accuracy around 83%
 
 code is in `src` folder
 - NeuralNetworkClassifier created with BaseMLP as parent class

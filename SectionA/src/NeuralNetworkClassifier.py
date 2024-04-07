@@ -5,15 +5,27 @@ from sklearn.model_selection import KFold
 
 def init_params():
     W = [*range(10)]
-    b = [*range(10)]
-    W[1] = np.random.rand(10, 2) - 0.5
+    b = [*range(10)]  # W0 is input
+
+    W[1] = np.random.rand(10, 2) - 0.5  # Hidden 1
     b[1] = np.random.rand(10, 1) - 0.5
-    W[2] = np.random.rand(10, 10) - 0.5
+    W[2] = np.random.rand(10, 10) - 0.5  # Dropout 1
     b[2] = np.random.rand(10, 1) - 0.5
-    W[3] = np.random.rand(10, 10) - 0.5
+    W[3] = np.random.rand(10, 10) - 0.5  # hidden 2
     b[3] = np.random.rand(10, 1) - 0.5
-    W[4] = np.random.rand(2, 10) - 0.5
-    b[4] = np.random.rand(2, 1) - 0.5
+    W[4] = np.random.rand(10, 10) - 0.5  # Dropout 2
+    b[4] = np.random.rand(10, 1) - 0.5
+    W[5] = np.random.rand(10, 10) - 0.5  # hidden 3
+    b[5] = np.random.rand(10, 1) - 0.5
+    W[6] = np.random.rand(10, 10) - 0.5  # Dropout 3
+    b[6] = np.random.rand(10, 1) - 0.5
+    W[7] = np.random.rand(10, 10) - 0.5  # hidden 4
+    b[7] = np.random.rand(10, 1) - 0.5
+    W[8] = np.random.rand(10, 10) - 0.5  # Dropout 4
+    b[8] = np.random.rand(10, 1) - 0.5
+
+    W[9] = np.random.rand(2, 10) - 0.5  # Output
+    b[9] = np.random.rand(2, 1) - 0.5
 
     return W, b
 
@@ -39,7 +51,7 @@ def one_hot(Y):
 
 
 def forward_prop(b: list, W: list, X):
-    layers = 5  # todo change when adding layers
+    layers = 10
 
     A = [*range(len(W))]
     Z = [*range(len(W))]
@@ -49,33 +61,43 @@ def forward_prop(b: list, W: list, X):
     A[1] = ReLU(Z[1])
 
     # hidden layers
-    for layer in range(2, layers-1):
+    for layer in [*range(2, layers - 1)]:
         Z[layer] = W[layer].dot(A[layer - 1]) + b[layer]
         A[layer] = ReLU(Z[layer])
 
     # output layer
-    Z[4] = W[4].dot(A[3]) + b[4]
-    A[4] = softmax(Z[4])
+    Z[9] = W[9].dot(A[8]) + b[9]
+    A[9] = softmax(Z[9])
     return A, Z
 
 
-def backward_prop(A: list, W: list, Z: list, X, Y):
-    layers = 5  # todo change when added layers
-    db = [*range(1, layers + 1)]
-    dW = [*range(1, layers + 1)]
-    dZ = [*range(1, layers + 1)]
+def backward_prop(A: list, D: list, W: list, Z: list,  X, Y):
+    # Assume a drop out of 0.0.3
+    p = 0.3
+    layers = len(W)
+    db = [*range(1, layers+1)]
+    dW = [*range(1, layers+1)]
+    dZ = [*range(1, layers+1)]
     m = Y.shape[0]
     one_hot_Y = one_hot(Y)
 
     # output layer
-    dZ[4] = A[4] - one_hot_Y  # loss
-    dW[4] = 1 / m * dZ[4].dot(A[3].T)
-    db[4] = 1 / m * np.sum(dZ[4])
+    dZ[9] = A[9] - one_hot_Y  # loss
+    dW[9] = 1 / m * dZ[9].dot(A[8].T)
+    db[9] = 1 / m * np.sum(dZ[9])
 
-    # hidden layers
-    for layer in [3, 2]:
-        dZ[layer] = np.dot(W[layer+1].T, dZ[layer+1]) * ReLU_deriv(Z[layer])
-        dW[layer] = 1 / m * dZ[layer].dot(A[layer-1].T)
+    # hidden and dropout layers
+    for layer in [*range(2, layers - 1)][::-1]:    # start from back to front
+        if layer in {2, 4, 6, 8}:
+            # logic for dropout
+            D[layer] = np.random.rand(A[layer].shape[0], A[layer].shape[1])
+            D[layer] = D[layer] < p
+            dA = np.dot(W[layer + 1].T, dZ[layer + 1]) * D[layer]  # Step 1: Apply mask D2
+            dZ[layer] = dA * ReLU_deriv(Z[layer]) / (1 - p)  # Step 2: Scale the value of active neurons
+            dW[layer] = 1 / m * dZ[layer].dot(A[layer - 1].T)
+            db[layer] = 1 / m * np.sum(dZ[layer])
+        dZ[layer] = np.dot(W[layer + 1].T, dZ[layer + 1]) * ReLU_deriv(Z[layer])
+        dW[layer] = 1 / m * dZ[layer].dot(A[layer - 1].T)
         db[layer] = 1 / m * np.sum(dZ[layer])
 
     # output layer
@@ -87,14 +109,10 @@ def backward_prop(A: list, W: list, Z: list, X, Y):
 
 
 def update_params(b: list, W: list, db: list, dW: list, learning_rate):
-    W[1] = W[1] - learning_rate * dW[1]
-    b[1] = b[1] - learning_rate * db[1]
-    W[2] = W[2] - learning_rate * dW[2]
-    b[2] = b[2] - learning_rate * db[2]
-    W[3] = W[3] - learning_rate * dW[3]
-    b[3] = b[3] - learning_rate * db[3]
-    W[4] = W[4] - learning_rate * dW[4]
-    b[4] = b[4] - learning_rate * db[4]
+    layers = len(W)
+    for layer in [*range(1,10)]:
+        W[layer] = W[layer] - learning_rate * dW[layer]
+        b[layer] = b[layer] - learning_rate * db[layer]
     return W, b
 
 
@@ -112,6 +130,7 @@ class NeuralNet(BaseMLP):
     Base class for MLP classification.
     """
 
+
     def __init__(self, hidden_layer_sizes, batch_size, learning_rate, max_iter, random_state, momentum):
         super().__init__(hidden_layer_sizes, batch_size, learning_rate, max_iter, random_state, momentum)
         self.b = [*range(10)]
@@ -121,6 +140,7 @@ class NeuralNet(BaseMLP):
         self.dW = [*range(10)]
         self.db = [*range(10)]
         self.dZ = [*range(10)]
+        self.D = [*range(10)]
 
     def fit(self, X, Y) -> None:
         """
@@ -132,16 +152,32 @@ class NeuralNet(BaseMLP):
             The input data
         Y : list of shape (n_samples,) or (n_samples, n_outputs)
             The target values (class labels for classification).
+        batch_size : int, optional (default=32)
+            The size of each mini-batch.
+        random_state : int or None, optional (default=None)
+            The random seed for reproducible sampling of mini-batches.
         """
+        # Set random seed if provided
+        np.random.seed(self.random_state)
         self.W, self.b = init_params()
 
+        # Determine the number of batches
+        n_samples = X.shape[0]
+        n_batches = (n_samples + self.batch_size - 1) // self.batch_size
+
         for i in range(self.max_iter):
-            self.A, self.Z = forward_prop(self.b, self.W, X)
-            self.db, self.dW = backward_prop(self.A, self.W, self.Z, X, Y)
-            self.W, self.b = update_params(self.b, self.W, self.db, self.dW, self.learning_rate)
-            if i % 100 == 0:
-                print("Iteration: ", i)
-                print("Accuracy:  ", get_accuracy(get_predictions(self.A[4]), Y))    #TODO CHANGE TO LAST LAYER
+            for batch in range(n_batches):
+                start_idx = batch * self.batch_size
+                end_idx = min((batch + 1) * self.batch_size, n_samples)
+                X_batch = X[start_idx:end_idx]
+                Y_batch = Y[start_idx:end_idx]
+
+                self.A, self.Z = forward_prop(self.b, self.W, X_batch)
+                self.db, self.dW = backward_prop(self.A, self.D, self.W, self.Z, X_batch, Y_batch)
+                self.W, self.b = update_params(self.b, self.W, self.db, self.dW, self.learning_rate)
+                if i % 100 == 0:
+                    print("Iteration: ", i)
+                    print("Accuracy:  ", get_accuracy(get_predictions(self.A[9]), Y))  # TODO CHANGE TO LAST LAYER
 
         return None
 
@@ -161,7 +197,7 @@ class NeuralNet(BaseMLP):
         """
 
         self.A, self.Z = forward_prop(self.b, self.W, x)
-        predictions = get_predictions(self.A[4])  # todo change to output layer
+        predictions = get_predictions(self.A[9])  # todo change to output layer
 
         return predictions
 
