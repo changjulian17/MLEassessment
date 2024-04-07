@@ -1,5 +1,6 @@
 import pandas as pd
 from pandas import DataFrame
+from pydantic import BaseModel
 from sklearn.preprocessing import LabelEncoder
 import pickle
 
@@ -49,4 +50,29 @@ def preprocess_and_save_data():
         pickle.dump(label_encoder, f)
     f.close()
 
+
+def preprocess_request_data(track_dict: BaseModel) -> pd.DataFrame:
+    df_tracks = basemodel_converter(track_dict)
+    # Drop nulls
+    df_tracks = df_tracks.dropna()
+
+    # Enriching with two more attributes
+    # Count of tags
+    df_tracks['tags_count'] = df_tracks['tags'].apply(lambda x: len(x.split(',')))
+    # Longest tag
+    df_tracks['longest_tag_length'] = df_tracks['tags'].apply(lambda x: max(len(tag) for tag in x.split(',')))
+
+    # Drop title and tags col
+    df_tracks = df_tracks.drop(columns=['title', 'tags']).set_index('trackID')
+
+    return df_tracks
+
+
 # preprocess_and_save_data() #todo remove if called from elsewhere
+
+def basemodel_converter(track_dict: BaseModel) -> pd.DataFrame:
+    if isinstance(track_dict, BaseModel):
+        track_dict = track_dict.dict()
+    track_list = [track for track in track_dict['tracks']]
+    df_tracks: DataFrame = pd.DataFrame(track_list)
+    return df_tracks

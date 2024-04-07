@@ -1,8 +1,10 @@
 import pandas as pd
+from pydantic import BaseModel
+
 import SectionB.src.utils.dbendpoint as db
+from SectionB.src.data_processing.train_data_preprocessing import basemodel_converter
 
 
-# create a DB
 def create_music_db():
     # Load all given data with tags
     df_feat = pd.read_csv('../../data/features.csv')
@@ -21,7 +23,12 @@ def create_music_db():
     print(f"{len(data)} entries initialised in music DB with {len(data[0])} cols")
 
 
-def add_entry_to_db():
-    return "values"
+def add_entry_to_db(track_dict: BaseModel, Y_pred: pd.DataFrame):
+    # X dataframe
+    df_tracks = basemodel_converter(track_dict)
+    # combine
+    combined_df = pd.merge(df_tracks, Y_pred, on='trackID')
+    db.insert_track(combined_df)
+    return None
 
 

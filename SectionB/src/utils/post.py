@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 
 class UserTrack(BaseModel):
@@ -159,3 +160,7 @@ class UserTrack(BaseModel):
     vect_146: float
     vect_147: float
     vect_148: float
+
+
+class UserTracks(BaseModel):
+    tracks: List[UserTrack]
