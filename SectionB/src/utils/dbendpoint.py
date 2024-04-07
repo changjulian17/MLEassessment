@@ -7,9 +7,7 @@ conn = sqlite3.connect('../../data/db/music.db')
 c = conn.cursor()
 
 
-"""
-db builder function instantiate DB with X variables + Y target
-"""
+# Db builder function instantiate DB with X variables + Y target
 def init_db(df: pd.DataFrame):
     # Convert DataFrame to SQLite table
     df.to_sql('music', conn, if_exists='replace', index=False)
@@ -17,20 +15,34 @@ def init_db(df: pd.DataFrame):
     # Commit changes and close connection
     conn.commit()
 
-
+# Get all records in music db
 def get_all():
     c.execute("SELECT * FROM music")
     return c.fetchall()
 
 
-"""
-add for single entries only for this DB
-"""
+# Add for single entries only for this DB
 def insert_track(track: dict):
     with conn:
-        c.execute("INSERT INTO employees VALUES (:first, :last, :pay)") #todo finish single entry function
+        c.execute("INSERT INTO employees VALUES (:first, :last, :pay)")  # todo finish single entry function
 
 
+# Util for getting pydantic schema
+def generate_pydantic_schema():
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(music)")
+    schema = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    pydantic_schema = generate_pydantic_schema('music', schema)
+
+    with open('../../data/db/music_schema.txt', 'w') as file:
+        file.write(pydantic_schema)
+    file.close()
+    print("Pydantic schema saved to output_schema.txt")
+
+    return pydantic_schema
 # data = {
 #     'id': [1, 2, 3],
 #     'name': ['Alice', 'Bob', 'Charlie'],

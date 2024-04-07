@@ -1,7 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 import uvicorn
-from SectionB.src.utils.post import UserPost
+from SectionB.src.utils.post import UserTrack
 from SectionB.src.utils.load_data_to_db import create_music_db
 from SectionB.src.utils.load_trained_model import XGBModelWrapper
 
@@ -10,7 +10,7 @@ create_music_db()
 # Init model
 mdl = XGBModelWrapper()
 mdl.load_model()
-#Init web app
+# Init web app
 app = FastAPI()
 
 features = []
@@ -25,15 +25,16 @@ def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
 
-@app.post("/post", response_model=UserPost)
-async def create_post(feature: UserPost):
+@app.post("/post", response_model=UserTrack)
+async def create_post(feature: UserTrack):
     features.append(feature)
     # take post and pass it to model predictor
 
+    mdl.predict()
     return feature
 
 
-@app.get("/posts", response_model=list[UserPost])
+@app.get("/posts", response_model=list[UserTrack])
 async def get_all_posts():
     return features
 
