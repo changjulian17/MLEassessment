@@ -1,0 +1,634 @@
+[
+    {
+        "name": "trackID",
+        "type": "INTEGER"
+    },
+    {
+        "name": "title",
+        "type": "TEXT"
+    },
+    {
+        "name": "tags",
+        "type": "TEXT"
+    },
+    {
+        "name": "loudness",
+        "type": "REAL"
+    },
+    {
+        "name": "tempo",
+        "type": "REAL"
+    },
+    {
+        "name": "time_signature",
+        "type": "REAL"
+    },
+    {
+        "name": "key",
+        "type": "REAL"
+    },
+    {
+        "name": "mode",
+        "type": "REAL"
+    },
+    {
+        "name": "duration",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_1",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_2",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_3",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_4",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_5",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_6",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_7",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_8",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_9",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_10",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_11",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_12",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_13",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_14",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_15",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_16",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_17",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_18",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_19",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_20",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_21",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_22",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_23",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_24",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_25",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_26",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_27",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_28",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_29",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_30",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_31",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_32",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_33",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_34",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_35",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_36",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_37",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_38",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_39",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_40",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_41",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_42",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_43",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_44",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_45",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_46",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_47",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_48",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_49",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_50",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_51",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_52",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_53",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_54",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_55",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_56",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_57",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_58",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_59",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_60",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_61",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_62",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_63",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_64",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_65",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_66",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_67",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_68",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_69",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_70",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_71",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_72",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_73",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_74",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_75",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_76",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_77",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_78",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_79",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_80",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_81",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_82",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_83",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_84",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_85",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_86",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_87",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_88",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_89",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_90",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_91",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_92",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_93",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_94",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_95",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_96",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_97",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_98",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_99",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_100",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_101",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_102",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_103",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_104",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_105",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_106",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_107",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_108",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_109",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_110",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_111",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_112",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_113",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_114",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_115",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_116",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_117",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_118",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_119",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_120",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_121",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_122",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_123",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_124",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_125",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_126",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_127",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_128",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_129",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_130",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_131",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_132",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_133",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_134",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_135",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_136",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_137",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_138",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_139",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_140",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_141",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_142",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_143",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_144",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_145",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_146",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_147",
+        "type": "REAL"
+    },
+    {
+        "name": "vect_148",
+        "type": "REAL"
+    },
+    {
+        "name": "genre",
+        "type": "TEXT"
+    }
+]
