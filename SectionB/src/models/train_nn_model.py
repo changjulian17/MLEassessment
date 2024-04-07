@@ -65,7 +65,3 @@ cv_scores = cross_val_score(model, X_train, Y_train, cv=10)
 # Print the cross-validation scores
 print("Cross-validation scores:", cv_scores)
 print("Mean CV score:", cv_scores.mean())
-
-# Saving model to pickle file
-with open('../model/nn.pickle', 'wb') as f:
-    pickle.dump(model, f)

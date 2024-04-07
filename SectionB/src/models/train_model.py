@@ -95,7 +95,7 @@ def eval_test_csv():
     df_Y_eval.to_csv('../data/results/prediction.csv', index_label='trackID')
 
 
-# train_model()
+train_model()
 
 # eval_test_csv()  #todo remove if called outside
 

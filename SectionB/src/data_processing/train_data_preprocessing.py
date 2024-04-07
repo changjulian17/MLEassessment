@@ -1,4 +1,5 @@
 import pandas as pd
+from pandas import DataFrame
 from sklearn.preprocessing import LabelEncoder
 import pickle
 
@@ -12,8 +13,10 @@ def preprocess_and_save_data():
     df_test = pd.read_csv('../../data/test.csv')
 
     # Drop nulls
-    df_feat = df_feat.dropna()
-    df_y = df_y.loc[df_feat.index]
+    temp: DataFrame = pd.merge(df_feat, df_y, on='trackID').dropna()
+    df_feat = temp[temp.columns[:-1]]
+    df_y = temp[['trackID', 'genre']]
+    del temp
 
     # Enriching with two more attributes
     # Count of tags
