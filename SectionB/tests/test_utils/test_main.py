@@ -55,6 +55,6 @@ payload = {
     "name": "another one",
     "body": "anotherrre"
 }
-url = 'http://0.0.0.0:8000/posts'
+url = 'http://0.0.0.0:8000/post'
 curl_request = generate_curl_post_request(url, payload)
 print(curl_request)

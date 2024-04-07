@@ -1,11 +1,14 @@
 FROM python:3.11
 
-WORKDIR /SectionB
+WORKDIR /MLEassessment
 
-COPY ./src ./src
+COPY ./src ./SectionB/src
 
-RUN pip install -r "./src/requirements.txt"
+RUN pip install -r "./SectionB/src/requirements.txt"
 
-COPY ./data ./data
+COPY ./data ./SectionB/data
 
-CMD ["python", "./src/utils/setup.py"]
+ENV PYTHONPATH=/MLEassessment:$PYTHONPATH
+
+CMD ["python", "SectionB/src/utils/main.py"]
+
