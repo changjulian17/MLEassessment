@@ -177,7 +177,7 @@ class NeuralNet(BaseMLP):
                 self.W, self.b = update_params(self.b, self.W, self.db, self.dW, self.learning_rate)
                 if i % 100 == 0:
                     print("Iteration: ", i)
-                    print("Accuracy:  ", get_accuracy(get_predictions(self.A[9]), Y))  # TODO CHANGE TO LAST LAYER
+                    print("Accuracy:  ", get_accuracy(get_predictions(self.A[9]), Y))
 
         return None
 
@@ -197,7 +197,7 @@ class NeuralNet(BaseMLP):
         """
 
         self.A, self.Z = forward_prop(self.b, self.W, x)
-        predictions = get_predictions(self.A[9])  # todo change to output layer
+        predictions = get_predictions(self.A[9])
 
         return predictions
 
