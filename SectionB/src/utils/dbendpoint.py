@@ -43,3 +43,10 @@ def generate_pydantic_schema():
     print("Pydantic schema saved to output_schema.txt")
 
     return pydantic_schema
+
+
+def lookup_genre(genre: str) -> list:
+    c.execute("SELECT title FROM music WHERE genre=:genre;",
+              {'genre': genre})
+    return c.fetchall()
+

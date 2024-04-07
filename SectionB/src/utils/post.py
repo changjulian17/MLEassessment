@@ -164,3 +164,6 @@ class UserTrack(BaseModel):
 
 class UserTracks(BaseModel):
     tracks: List[UserTrack]
+
+class Genre(BaseModel):
+    genre: List

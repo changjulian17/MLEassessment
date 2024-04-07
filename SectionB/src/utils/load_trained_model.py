@@ -32,17 +32,3 @@ class XGBModelWrapper:
 
         return df_Y_eval
 
-
-# # Example usage:
-# # Instantiate the model wrapper
-# model_wrapper = XGBModelWrapper()
-# # Load the model
-# model_wrapper.load_model()
-#
-# # load some data
-# with open('../../data/preprocessed_data/X.pickle', 'rb') as f:
-#     X = pickle.load(f)
-#
-# # Perform predictions
-# predictions = model_wrapper.predict(X)
-# print(predictions)
