@@ -6,6 +6,13 @@ from sklearn.compose import ColumnTransformer
 from sklearn.metrics import accuracy_score
 from sklearn.neural_network import MLPClassifier
 
+"""
+Loads preprocessed data from pickled files, trains a neural network model, and evaluates its performance.
+Was under consideration but performance was not as good as XGBoost
+
+"""
+
+
 # Load pre-processed data
 with open('../../data/preprocessed_data/X.pickle', 'rb') as f:
     X = pickle.load(f)

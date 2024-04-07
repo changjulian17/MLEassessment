@@ -5,9 +5,12 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 
 
-def preprocess_and_save_data():
+def preprocess_and_save_data() -> None:
     """
-    Load data
+    Load data from CSV files, preprocess features, encode target variable, and save preprocessed data.
+
+    Returns:
+        None
     """
     df_feat = pd.read_csv('../../data/features.csv')
     df_y = pd.read_csv('../../data/labels.csv')
@@ -52,6 +55,15 @@ def preprocess_and_save_data():
 
 
 def preprocess_request_data(track_dict: BaseModel) -> pd.DataFrame:
+    """
+    Preprocess track data provided as a Pydantic BaseModel and return a DataFrame.
+
+    Args:
+        track_dict (BaseModel): Pydantic BaseModel containing track data.
+
+    Returns:
+        pd.DataFrame: Preprocessed DataFrame containing track features.
+    """
     df_tracks = basemodel_converter(track_dict)
     # Drop nulls
     df_tracks = df_tracks.dropna()
@@ -71,6 +83,15 @@ def preprocess_request_data(track_dict: BaseModel) -> pd.DataFrame:
 # preprocess_and_save_data() #todo remove if called from elsewhere
 
 def basemodel_converter(track_dict: BaseModel) -> pd.DataFrame:
+    """
+    Convert Pydantic BaseModel to DataFrame.
+
+    Args:
+        track_dict (BaseModel): Pydantic BaseModel containing track data.
+
+    Returns:
+        pd.DataFrame: DataFrame containing track data.
+    """
     if isinstance(track_dict, BaseModel):
         track_dict = track_dict.dict()
     track_list = [track for track in track_dict['tracks']]

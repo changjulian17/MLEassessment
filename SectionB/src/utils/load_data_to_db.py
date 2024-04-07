@@ -5,10 +5,16 @@ import SectionB.src.utils.dbendpoint as db
 from SectionB.src.data_processing.train_data_preprocessing import basemodel_converter
 
 
-def create_music_db():
+def create_music_db() -> None:
+    """
+    Creates and initializes a music database with data from CSV files.
+
+    Returns:
+        None
+    """
     # Load all given data with tags
-    df_feat = pd.read_csv('../../data/features.csv')
-    df_y = pd.read_csv('../../data/labels.csv')
+    df_feat = pd.read_csv('SectionB/data/features.csv')
+    df_y = pd.read_csv('SectionB/data/labels.csv')
 
     # Drop nulls
     temp = pd.merge(df_feat, df_y, on='trackID').dropna()
@@ -23,7 +29,17 @@ def create_music_db():
     print(f"{len(data)} entries initialised in music DB with {len(data[0])} cols")
 
 
-def add_entry_to_db(track_dict: BaseModel, Y_pred: pd.DataFrame):
+def add_entry_to_db(track_dict: BaseModel, Y_pred: pd.DataFrame) -> None:
+    """
+    Adds a single entry to the music database.
+
+    Args:
+        track_dict (BaseModel): Pydantic BaseModel containing track data.
+        Y_pred (pd.DataFrame): DataFrame containing predicted genre for each track.
+
+    Returns:
+        None
+    """
     # X dataframe
     df_tracks = basemodel_converter(track_dict)
     # combine

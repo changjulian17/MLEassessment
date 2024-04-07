@@ -3,9 +3,22 @@ import pandas as pd
 
 
 class XGBModelWrapper:
+    """
+    Wrapper class for an XGBoost model.
+
+    Attributes:
+        label_encoder_path (str): Path to the label encoder pickle file.
+        model_path (str): Path to the trained model pickle file.
+        label_encoder: Label encoder object.
+        model: Trained XGBoost model object.
+
+    Methods:
+        load_model(): Loads the label encoder and the trained model from the respective pickle files.
+        predict(input_data): Performs predictions using the loaded model on the input data.
+    """
     def __init__(self):
-        self.label_encoder_path = '../../data/preprocessed_data/label_encoder.pickle'
-        self.model_path = '../../src/models/xgb_model.pickle'
+        self.label_encoder_path = 'SectionB/data/preprocessed_data/label_encoder.pickle'
+        self.model_path = 'SectionB/src/models/xgb_model.pickle'
         self.label_encoder = None
         self.model = None
 
@@ -31,4 +44,3 @@ class XGBModelWrapper:
         df_Y_eval.index = input_data.index
 
         return df_Y_eval
-

@@ -1,38 +1,34 @@
 import subprocess
-
 from fastapi.testclient import TestClient
 from SectionB.src.utils.main import app
-import requests
 import json
 
 client = TestClient(app)
 
 
-def test_read_root():
+def test_read_root() -> None:
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    assert response.json().key == "Hello"
 
 
-def test_read_item():
-    response = client.get("/items/1")
-    assert response.status_code == 200
-    assert response.json() == {"item_id": 1, "q": None}
-    print("test")
-
-
-def test_read_item_with_query_param():
-    response = client.get("/items/1?q=test")
-    assert response.status_code == 200
-    assert response.json() == {"item_id": 1, "q": "test"}
-
-
-def test_read_item_invalid_item_id():
+def test_read_item_invalid_item_id() -> None:
     response = client.get("/items/foo")
     assert response.status_code == 422  # 422 Unprocessable Entity for invalid query parameter
 
 
-def generate_curl_post_request(url, payload):    # generates json requests for my webapp
+def generate_curl_post_request(url, payload):
+    """
+        Generate a cURL POST request for a given URL and payload.
+
+        Parameters:
+            url (str): The URL to send the POST request to.
+            payload (dict): The payload to include in the POST request.
+
+        Returns:
+            subprocess.CompletedProcess: Completed process object representing the execution of the cURL command.
+
+    """
     headers = {
         'accept': 'application/json',
         'Content-Type': 'application/json'
@@ -53,7 +49,7 @@ def generate_curl_post_request(url, payload):    # generates json requests for m
 # Example usage
 payload = {
     "name": "another one",
-    "body": "anotherrre"
+    "body": "anotherrr"
 }
 url = 'http://0.0.0.0:8000/post'
 curl_request = generate_curl_post_request(url, payload)

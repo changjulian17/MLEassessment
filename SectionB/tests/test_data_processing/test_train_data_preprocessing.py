@@ -9,7 +9,13 @@ import pickle
 
 class TestDataPreprocessing(unittest.TestCase):
     def test_preprocess_and_save_data(self):
-        from SectionB.src.data_processing import train_data_preprocessing
+        """
+            Unit tests for data preprocessing.
+
+            Methods:
+                test_preprocess_and_save_data(): Test case for preprocessing and saving data.
+
+        """
 
         # Call the function
         preprocess_and_save_data()

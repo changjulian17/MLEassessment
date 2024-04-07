@@ -8,9 +8,13 @@ import xgboost as xgb
 from sklearn.metrics import accuracy_score
 
 
-def train_model():
+def train_model() -> None:
     """
-    takes data from pickles and trains model and saves it
+    Takes data from pickles, trains an XGBoost model, and saves it.
+    Only used before deployment to docker
+
+    Returns:
+        None
     """
     # Load pre-processed data
     with open('../../data/preprocessed_data/X.pickle', 'rb') as f:
@@ -70,7 +74,11 @@ def train_model():
 
 def eval_test_csv():
     """
-    predicting the test csv
+    Predicts genres for test data using a trained model and saves predictions to a CSV file.
+    Only used before deployment to docker
+
+    Returns:
+        None
     """
     # Load saved encoder
     with open('../../data/preprocessed_data/label_encoder.pickle', 'rb') as f:
@@ -92,11 +100,4 @@ def eval_test_csv():
     df_Y_eval = pd.DataFrame(Y_eval, columns=['genre'])
 
     # Save DataFrame to CSV file
-    df_Y_eval.to_csv('../data/results/prediction.csv', index_label='trackID')
-
-
-train_model()
-
-# eval_test_csv()  #todo remove if called outside
-
-
+    df_Y_eval.to_csv('SectionB/data/results/prediction.csv', index_label='trackID')

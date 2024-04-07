@@ -1,52 +1,73 @@
 import sqlite3
 import pandas as pd
 
-# Create SQLite database connection
-conn = sqlite3.connect('../../data/db/music.db')
-# # Create a cursor object
-c = conn.cursor()
-
 
 # Db builder function instantiate DB with X variables + Y target
-def init_db(df: pd.DataFrame):
+def init_db(df: pd.DataFrame) -> None:
+    """
+    Initializes a SQLite database with data from a DataFrame.
+
+    Args:
+        df (pd.DataFrame): DataFrame containing data to be inserted into the database.
+
+    Returns:
+        None
+    """
+    # Create SQLite database connection
+    conn = sqlite3.connect('SectionB/data/db/music.db')
     # Convert DataFrame to SQLite table
     df.to_sql('music', conn, if_exists='replace', index=False)
 
-    # Commit changes and close connection
-    conn.commit()
 
 # Get all records in music db
-def get_all():
+def get_all() -> list:
+    """
+    Retrieves all records from the 'music' table in the SQLite database.
+
+    Returns:
+        list: A list of tuples representing all records in the 'music' table.
+    """
+
+    # Create SQLite database connection
+    conn = sqlite3.connect('SectionB/data/db/music.db')
+    # # Create a cursor object
+    c = conn.cursor()
     c.execute("SELECT * FROM music")
     return c.fetchall()
 
 
 # Add for single entries only for this DB
 def insert_track(combined_df: pd.DataFrame) -> None:
+    """
+    Inserts track data into the 'music' table in the SQLite database.
+
+    Args:
+        combined_df (pd.DataFrame): DataFrame containing track data to be inserted.
+
+    Returns:
+        None
+    """
+    # Create SQLite database connection
+    conn = sqlite3.connect('SectionB/data/db/music.db')
+
     with conn:
         combined_df.to_sql('music', conn, if_exists='append', index=False)
 
 
-# Util for getting pydantic schema
-def generate_pydantic_schema():
-    cursor = conn.cursor()
-    cursor.execute("PRAGMA table_info(music)")
-    schema = cursor.fetchall()
-    cursor.close()
-    conn.close()
-
-    pydantic_schema = generate_pydantic_schema('music', schema)
-
-    with open('../../data/db/music_schema.txt', 'w') as file:
-        file.write(pydantic_schema)
-    file.close()
-    print("Pydantic schema saved to output_schema.txt")
-
-    return pydantic_schema
-
-
 def lookup_genre(genre: str) -> list:
+    """
+    Looks up tracks in the 'music' table with the specified genre.
+
+    Args:
+        genre (str): Genre to be searched for.
+
+    Returns:
+        list: A list of tuples representing tracks with the specified genre.
+    """
+    # Create SQLite database connection
+    conn = sqlite3.connect('SectionB/data/db/music.db')
+    c = conn.cursor()
+
     c.execute("SELECT title FROM music WHERE genre=:genre;",
               {'genre': genre})
     return c.fetchall()
-

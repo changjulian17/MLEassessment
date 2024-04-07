@@ -8,6 +8,16 @@ from SectionB.src.utils.load_data_to_db import create_music_db, add_entry_to_db
 from SectionB.src.utils.load_trained_model import XGBModelWrapper
 from typing import Dict
 
+"""
+FastAPI web application for predicting music genres and retrieving tracks by genre.
+
+Methods:
+    create_post(track_dict: UserTracks): Endpoint for predicting music genres based on user-provided track data.
+    get_all_posts(genre: str): Endpoint for retrieving tracks by genre.
+
+Returns:
+    None
+"""
 # Init DB
 create_music_db()
 # Init model
@@ -21,7 +31,7 @@ features = []
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "Welcome to the Music Genre Prediction API!\n\n This API allows you to predict the genre of music tracks and retrieve tracks by genre. \n\nSimply use the appropriate endpoints to make predictions or explore music genres.\n\nEndpoints:\n- /predict: Predict the genre of music tracks based on input features.\n- /genre: Retrieve tracks by specifying a genre.\n\nExplore and enjoy the world of music with our API!"}
 
 
 @app.post("/predict", response_model=Dict)

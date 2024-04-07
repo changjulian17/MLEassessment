@@ -3,6 +3,22 @@ from typing import List
 
 
 class UserTrack(BaseModel):
+    """
+        Represents a single music track.
+
+        Attributes:
+            trackID (int): The unique identifier of the track.
+            title (str): The title of the track.
+            tags (str): Tags associated with the track.
+            loudness (float): Loudness of the track.
+            tempo (float): Tempo of the track.
+            time_signature (float): Time signature of the track.
+            key (float): Key of the track.
+            mode (float): Mode of the track.
+            duration (float): Duration of the track.
+            vect_1 to vect_148 (float): Features of the track.
+
+    """
     trackID: int
     title: str
     tags: str
@@ -163,7 +179,11 @@ class UserTrack(BaseModel):
 
 
 class UserTracks(BaseModel):
-    tracks: List[UserTrack]
+    """
+        Represents a list of music tracks.
 
-class Genre(BaseModel):
-    genre: List
+        Attributes:
+            tracks (List[UserTrack]): List of UserTrack objects representing individual music tracks.
+
+    """
+    tracks: List[UserTrack]
