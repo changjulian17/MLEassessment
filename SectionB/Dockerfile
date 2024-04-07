@@ -8,6 +8,4 @@ RUN pip install -r "./src/requirements.txt"
 
 COPY ./data ./data
 
-COPY ./model ./model
-
-CMD ["python", "./src/train_model.py"]
+CMD ["python", "./src/utils/setup.py"]
